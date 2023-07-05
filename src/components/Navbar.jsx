@@ -9,6 +9,7 @@ import avatar from '../data/avatar.jpg';
 import {Cart,Chat,Notification,UserProfile } from '.';
 import { useStateContext } from '../contexts/ContextProvider';
 
+
 const Navbar = () => {
   const {activeMenu,setActiveMenu} = useStateContext();
   const NavButton =({title, customFunc,icon, color, dotColor}) => 
