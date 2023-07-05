@@ -11,12 +11,12 @@ import { useStateContext } from '../contexts/ContextProvider';
 
 
 const Navbar = () => {
-  const {activeMenu,setActiveMenu} = useStateContext();
+  const {activeMenu,setActiveMenu,handleClick,isClicked,setIsClicked,screenSize,setScreenSize} = useStateContext();
   const NavButton =({title, customFunc,icon, color, dotColor}) => 
      (
       <TooltipComponent content={title} position='BottomCenter'>
        <button type='button' onClick={customFunc} style={{color}} className='relative text-xl rounded-full p-3 hover:bg-light-gray'>
-        <span style={{background: dotColor}} className='absolute inline-flex rounded-full h-2 w-2 right-2 top-2'>{icon}</span>
+        <span style={{background: dotColor}} className='absolute inline-flex rounded-full h-2 w-2 right-2 top-2'/>{icon}
        </button>
       </TooltipComponent>
     )
@@ -27,11 +27,11 @@ const Navbar = () => {
       <NavButton title='Menu' customFunc={()=> setActiveMenu((prevActiveMenu) => !prevActiveMenu)} 
                     color='black' icon={<AiOutlineMenu />}/>
                     <div className='flex'>
-                    <NavButton title='Cart' customFunc={()=> handleClick('Cart')} 
+                    <NavButton title='Cart' customFunc={()=> handleClick('cart')} 
                     color='blue' icon={<FiShoppingCart />}/>
-                    <NavButton title='Chat' dotColor="#03C9D7" customFunc={()=> handleClick('Chat')} 
+                    <NavButton title='Chat' dotColor="#03C9D7" customFunc={()=> handleClick('chat')} 
                     color='blue' icon={<BsChatLeft />}/>
-                    <NavButton title='Notification' dotColor="#03C9D7" customFunc={()=> handleClick('Notification')} 
+                    <NavButton title='Notification' dotColor="#03C9D7" customFunc={()=> handleClick('notification')} 
                     color='blue' icon={<RiNotification3Line />}/>
                     <TooltipComponent content='Profile' position='BottomCenter'>
                       <div className='flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg' onClick={()=> handleClick('userProfile')}> 
@@ -43,6 +43,10 @@ const Navbar = () => {
                           <MdKeyboardArrowDown className='text-14 text-gray-400'/>  
                       </div>
                     </TooltipComponent>
+                    {isClicked.cart && <Cart />}
+                    {isClicked.chat && <Chat />}
+                    {isClicked.notification && <Notification />}
+                    {isClicked.userProfile && <UserProfile />}
 
                    
                     </div>
